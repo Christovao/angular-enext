@@ -1,0 +1,73 @@
+<div class="content" role="main">
+
+  <h1>Meu Dog!</h1>
+
+  <form class="example-form">
+
+  <mat-card>
+    <mat-form-field class="example-full-width">
+      <mat-select
+        placeholder="Raças"
+        (selectionChange)="breedChange($event.value)"
+        [(value)]="selectedBreed">
+        <mat-option
+          *ngFor="let breed of breeds"
+          [value]="breed">
+          {{ breed }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input
+        [ngStyle]="{'color': getColor(), 'font-family': getFont()}"
+        value="{{ dogName }}"
+        matInput
+        placeholder="Nome do cachorro"
+        autocomplete="off"
+        (blur)="onNameChange($event.target.value)">
+    </mat-form-field>
+
+    <div class="img-container" *ngIf="selectedBreed">
+      <img class="dog-img" src="{{ dogImg }}">
+    </div>
+
+    <mat-form-field class="example-full-width">
+      <mat-select
+        placeholder="Selecione a cor da fonte"
+        (selectionChange)="colorChange($event.value)"
+        [(value)]="selectedColor">
+        <mat-option
+          *ngFor="let color of colors"
+          [value]="color">
+          {{ color }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select
+        placeholder="Selecione a fonte"
+        (selectionChange)="fontChange($event.value)"
+        [(value)]="selectedFont">
+        <mat-option
+          *ngFor="let font of fonts"
+          [value]="font">
+          {{ font }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="submit()"
+      type="button">Salvar informações</button>
+  
+  </mat-card>
+
+  </form>
+
+</div>
+
+<router-outlet></router-outlet>
